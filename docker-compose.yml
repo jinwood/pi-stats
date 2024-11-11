@@ -1,13 +1,10 @@
+name: pi-stats
 services:
   vue-app:
-    build: .
+    build:
+      context: .
     ports:
       - '3000:80'
-      - '5173:5173'
-    volumes:
-      - ./src:/app/src
-      - ./public:/app/public
-      - node_modules:/app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     restart: unless-stopped
