@@ -1,22 +1,22 @@
-FROM oven/bun:latest
+FROM oven/bun:latest as builder
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git
+# Install dependencies
+COPY package.json ./
+RUN bun install
 
-COPY package.json bun.lockb* ./
-run bun install
-
+# Build the app
 COPY . .
-
 RUN bun run build
 
+# Use official nginx image
 FROM nginx:alpine
 
-COPY --from=0 /app/dist /usr/share/nginx/html
+# Copy built files
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+# Use default nginx config for now
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
