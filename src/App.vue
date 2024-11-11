@@ -4,7 +4,7 @@ import SystemMonitor from './components/SystemMonitor.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/pie.png" width="125" height="125" />
     <h1>Pi</h1>
   </header>
   <SystemMonitor />
