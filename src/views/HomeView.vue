@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import SystemMonitor from '../components/SystemMonitor.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <SystemMonitor />
   </main>
 </template>
