@@ -1,10 +1,5 @@
-name: pi-stats
 services:
-  vue-app:
-    build:
-      context: .
+  pi-stats:
+    build: .
     ports:
       - '3000:80'
-    environment:
-      - NODE_ENV=production
-    restart: no
