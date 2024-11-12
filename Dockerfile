@@ -1,9 +1,18 @@
-FROM oven/bun:latest as builder
-WORKDIR /app
-COPY . .
-RUN bun install
-RUN bun run build
+FROM denoland/deno:alpine
 
-# Production stage
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
+
+# Cache the dependencies
+COPY deno.json .
+COPY import_map.json .
+RUN deno cache --import-map=import_map.json main.ts
+
+# Copy the rest of the application
+COPY . .
+
+# Compile the application
+RUN deno task build
+
+# Run the application
+CMD ["deno", "task", "start"]
+
