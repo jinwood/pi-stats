@@ -2,10 +2,10 @@ services:
   pi-stats:
     build: .
     ports:
-      - "3000:8000"
+      - "3000:80" # Map port 3000 on host to port 80 in container
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://0.0.0.0:8000"]
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 3
