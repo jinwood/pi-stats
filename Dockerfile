@@ -1,4 +1,4 @@
-FROM denoland/deno:alpine
+FROM denoland/deno:alpine as builder
 WORKDIR /app
 # Cache the dependencies
 COPY . .
@@ -9,6 +9,6 @@ RUN deno task build
 FROM nginx:alpine
 
 # Copy built files to nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
