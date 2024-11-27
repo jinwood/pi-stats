@@ -9,6 +9,6 @@ RUN deno task build
 FROM nginx:alpine
 
 # Copy built files to nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
